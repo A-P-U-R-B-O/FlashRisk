@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field, HttpUrl, constr
-from typing import Optional, List, Literal
+from pydantic import BaseModel, Field, HttpUrl
+from typing import Optional, List, Literal, Annotated
 from datetime import datetime
 
 # --- Disaster Event Models ---
@@ -57,7 +57,7 @@ class UserProfile(BaseModel):
     id: str
     name: Optional[str]
     email: Optional[str]
-    phone: Optional[constr(regex=r"^\+?[1-9]\d{1,14}$")]
+    phone: Optional[Annotated[str, Field(pattern=r"^\+?[1-9]\d{1,14}$")]]
     preferences: Optional[List[str]] = Field(None, description="Types of alerts the user wants to receive")
     created_at: datetime
     is_active: bool = True
