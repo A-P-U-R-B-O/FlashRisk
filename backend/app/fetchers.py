@@ -5,13 +5,19 @@ from .routes import update_earthquakes, update_alerts
 
 logger = logging.getLogger("flashrisk.fetchers")
 
+# === APIs ===
 USGS_API = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+RELIEFWEB_API = "https://api.reliefweb.int/v1/disasters?appname=FlashRisk&limit=20&sort[]=date:desc"
 
-# Main function FastAPI will call
+
+# === Called from FastAPI's startup ===
 async def start_background_fetchers(app, notification_manager):
     asyncio.create_task(fetch_and_update_earthquakes())
-    logger.info("✔️ Earthquake background fetcher started")
+    asyncio.create_task(fetch_and_update_alerts())
+    logger.info("✔️ Earthquake and Alert background fetchers started")
 
+
+# === Earthquake Fetcher ===
 async def fetch_and_update_earthquakes():
     while True:
         try:
@@ -20,7 +26,6 @@ async def fetch_and_update_earthquakes():
                 res.raise_for_status()
                 data = res.json()
 
-                # Extract simplified event info
                 events = [
                     {
                         "id": f["id"],
@@ -37,4 +42,33 @@ async def fetch_and_update_earthquakes():
         except Exception as e:
             logger.warning(f"⚠️ Error fetching earthquakes: {e}")
 
-        await asyncio.sleep(600)  # Repeat every 10 minutes
+        await asyncio.sleep(600)  # 10 mins
+
+
+# === Alert Fetcher ===
+async def fetch_and_update_alerts():
+    while True:
+        try:
+            async with httpx.AsyncClient() as client:
+                res = await client.get(RELIEFWEB_API, timeout=10)
+                res.raise_for_status()
+                data = res.json()
+
+                alerts = [
+                    {
+                        "id": str(d["id"]),
+                        "type": d["fields"].get("type", [{}])[0].get("name", "Unknown"),
+                        "country": d["fields"].get("country", [{}])[0].get("name", "Unknown"),
+                        "status": d["fields"].get("status", "unknown"),
+                        "date": d["fields"].get("date", {}).get("created"),
+                        "url": d["fields"].get("url", "")
+                    }
+                    for d in data.get("data", [])
+                ]
+
+                update_alerts(alerts)
+                logger.info(f"✅ Fetched and updated {len(alerts)} disaster alerts.")
+        except Exception as e:
+            logger.warning(f"⚠️ Error fetching alerts: {e}")
+
+        await asyncio.sleep(600)  # 10 mins
