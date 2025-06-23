@@ -1,13 +1,3 @@
-"""
-FlashRisk - Disaster Data Fetchers
-
-This module contains background fetchers for real-time disaster data.
-It pulls information from external APIs (e.g., USGS for earthquakes, NOAA for weather events, Twitter for social signals)
-and pushes relevant alerts to the NotificationManager.
-
-Author: A-P-U-R-B-O
-"""
-
 import asyncio
 import logging
 import os
