@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlashRisk – Real-Time Disaster Alert System</title>
+  <meta name="description" content="FlashRisk provides real-time alerts for natural disasters worldwide. Stay informed and stay safe with live data, interactive maps, and instant notifications.">
+  <meta name="theme-color" content="#1d3557">
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="FlashRisk – Real-Time Disaster Alert System">
+  <meta property="og:description" content="Receive instant alerts for earthquakes, storms, and more. Interactive dashboard and global coverage.">
+  <meta property="og:image" content="/opengraph.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flashrisk.example.com">
+
+  <!-- Favicon and icons -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="192x192" href="/logo192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Fonts and styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f7f9fa;
+      color: #1d3557;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(90deg, #457b9d, #1d3557 80%);
+      color: #fff;
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin: 0 0 0.5rem 0;
+    }
+    header p {
+      font-size: 1.25rem;
+      margin: 0.5rem 0 0 0;
+      color: #f1faee;
+    }
+    .cta {
+      display: inline-block;
+      margin: 2rem auto 1rem auto;
+      padding: 1rem 2.5rem;
+      background: #e63946;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: 0 2px 6px rgba(230,57,70,0.10);
+    }
+    .cta:hover {
+      background: #a4161a;
+    }
+    main {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .feature {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(38,50,56,0.07);
+      padding: 1.5rem;
+      width: 260px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.15s;
+    }
+    .feature:hover {
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 4px 18px rgba(38,50,56,0.11);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #457b9d;
+    }
+    footer {
+      background: #1d3557;
+      color: #f1faee;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.98rem;
+      flex-shrink: 0;
+    }
+    @media (max-width: 700px) {
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+      .feature {
+        width: 95%;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FlashRisk</h1>
+    <p>Real-Time Disaster Alerts. Global Coverage. Instant Notifications.</p>
+    <a href="/dashboard" class="cta">Go to Dashboard</a>
+  </header>
+  <main>
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon" aria-label="Live Data">&#9889;</div>
+        <h2>Live Data Feed</h2>
+        <p>Stay informed with up-to-the-minute earthquake, storm, and weather alerts from trusted global sources.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon" aria-label="Map">&#128506;</div>
+        <h2>Interactive Map</h2>
+        <p>Visualize disaster events as they happen on a dynamic, global map with filters for your region.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon" aria-label="Notification">&#128276;</div>
+        <h2>Instant Notifications</h2>
+        <p>Get SMS, email, or push notifications for critical events in your area. Be prepared, not surprised.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon" aria-label="AI">&#129302;</div>
+        <h2>AI-Powered Insights</h2>
+        <p>Advanced analytics and machine learning help you assess risk and prioritize your response.</p>
+      </div>
+    </section>
+    <p style="color:#6c757d;font-size:1.05rem;margin-top:2rem;">
+      <strong>FlashRisk</strong> is open-source and privacy-focused. <br>
+      <a href="https://github.com/A-P-U-R-B-O/FlashRisk" style="color:#457b9d;text-decoration:underline;">View on GitHub</a>
+    </p>
+  </main>
+  <footer>
+    &copy; 2025 FlashRisk &mdash; Built by A-P-U-R-B-O. Stay safe, stay informed.
+  </footer>
+</body>
+</html>
