@@ -9,8 +9,7 @@ from .utils import NotificationManager
 
 logger = logging.getLogger("flashrisk.fetchers")
 
-USGS_API = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_hour.geojson"
-NOAA_API = "https://api.weather.gov/alerts/active"
+USGS_API = USGS_API = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
 FETCH_INTERVAL = int(os.getenv("FETCH_INTERVAL_SECONDS", 60))  # seconds
 
 async def fetch_usgs_earthquakes():
