@@ -1,13 +1,3 @@
-"""
-FlashRisk - Real-Time Disaster Alert System
-
-This package initializes the core components and application context for FlashRisk.
-It sets up logging, configuration, API routing, background jobs for real-time disaster monitoring,
-and notification services.
-
-Author: A-P-U-R-B-O
-"""
-
 import logging
 import os
 
