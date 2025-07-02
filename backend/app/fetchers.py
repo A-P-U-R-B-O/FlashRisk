@@ -56,29 +56,28 @@ async def fetch_and_update_alerts():
                 for d in data.get("data", []):
                     fields = d.get("fields", {})
 
-                    # Strictly require type and country to be present and not empty
-                    alert_type = (
-                        fields["type"][0]["name"]
-                        if "type" in fields and isinstance(fields["type"], list) and fields["type"] and "name" in fields["type"][0]
-                        else None
-                    )
-                    country = (
-                        fields["country"][0]["name"]
-                        if "country" in fields and isinstance(fields["country"], list) and fields["country"] and "name" in fields["country"][0]
-                        else None
-                    )
-
-                    if not alert_type or not country:
-                        logger.warning(f"Skipping alert with missing type/country (id={d.get('id')})")
+                    # Use the "name" field and try to parse country and event type if possible
+                    name = fields.get("name")
+                    if not name:
+                        logger.warning(f"Skipping alert with missing name (id={d.get('id')})")
                         continue
+
+                    # Try to parse country and event type from the name (e.g. "Panama: River Pollution - Jun 2025")
+                    if ":" in name:
+                        country, rest = name.split(":", 1)
+                        country = country.strip()
+                        event_type = rest.split("-")[0].strip() if "-" in rest else rest.strip()
+                    else:
+                        country = None
+                        event_type = name
 
                     alert = {
                         "id": str(d["id"]),
-                        "type": alert_type,
+                        "type": event_type,
                         "country": country,
-                        "status": fields.get("status", "unknown") or "unknown",
-                        "date": fields.get("date", {}).get("created"),
-                        "url": fields.get("url", "") or ""
+                        "name": name,
+                        "url": d.get("href", ""),
+                        # Optionally add more fields if available
                     }
                     alerts.append(alert)
 
